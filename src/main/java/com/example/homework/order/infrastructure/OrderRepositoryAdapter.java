@@ -3,6 +3,8 @@ package com.example.homework.order.infrastructure;
 import com.example.homework.order.domain.OrderRepository;
 import com.example.homework.order.domain.PurchaseOrder;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -14,5 +16,10 @@ public class OrderRepositoryAdapter implements OrderRepository {
     @Override
     public PurchaseOrder save(PurchaseOrder purchaseOrder) {
         return orderJpaRepository.save(purchaseOrder);
+    }
+
+    @Override
+    public Page<PurchaseOrder> findAll(Pageable pageable) {
+        return orderJpaRepository.findAll(pageable);
     }
 }

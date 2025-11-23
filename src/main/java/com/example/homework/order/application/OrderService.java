@@ -6,8 +6,12 @@ import com.example.homework.order.application.dto.PurchaseOrderInfo;
 import com.example.homework.order.domain.OrderRepository;
 import com.example.homework.order.domain.PurchaseOrder;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -21,5 +25,13 @@ public class OrderService {
                 command.memberId(), command.amount(), command.status());
         PurchaseOrder saved = orderRepository.save(purchaseOrder);
         return new ResponseEntity<>(HttpStatus.CREATED.value(), PurchaseOrderInfo.from(saved), 1);
+    }
+
+    public ResponseEntity<List<PurchaseOrderInfo>> findAll(Pageable pageable) {
+        Page<PurchaseOrder> page = orderRepository.findAll(pageable);
+        List<PurchaseOrderInfo> list = page.stream()
+                .map(PurchaseOrderInfo::from)
+                .toList();
+        return new ResponseEntity<>(HttpStatus.OK.value(), list, page.getTotalElements());
     }
 }

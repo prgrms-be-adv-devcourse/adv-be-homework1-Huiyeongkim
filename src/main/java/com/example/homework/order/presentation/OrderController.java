@@ -6,7 +6,10 @@ import com.example.homework.order.application.dto.PurchaseOrderInfo;
 import com.example.homework.order.presentation.dto.PurchaseOrderRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RequiredArgsConstructor
@@ -20,6 +23,12 @@ public class OrderController {
     @PostMapping
     public ResponseEntity<PurchaseOrderInfo> create(@RequestBody PurchaseOrderRequest request) {
         return orderService.create(request.toCommand());
+    }
+
+    @Operation(summary = "주문 목록 조회", description = "생성된 주문을 페이지 단위로 조회한다.")
+    @GetMapping
+    public ResponseEntity<List<PurchaseOrderInfo>> findAll(Pageable pageable) {
+        return orderService.findAll(pageable);
     }
 
 }
