@@ -3,12 +3,11 @@ package com.example.homework.payment.presentation;
 import com.example.homework.common.ResponseEntity;
 import com.example.homework.payment.application.PaymentService;
 import com.example.homework.payment.application.dto.PaymentInfo;
+import com.example.homework.payment.presentation.dto.PaymentRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,5 +24,12 @@ public class PaymentController {
     public ResponseEntity<List<PaymentInfo>> findAll(Pageable pageable) {
         return paymentService.findAll(pageable);
     }
+
+    @Operation(summary = "토스 결제 승인", description = "토스 결제 완료 후 paymentkey/orderId/amount를 전달받아 결제를 승인한다.")
+    @PostMapping("/confirm")
+    public ResponseEntity<PaymentInfo> confirm(@RequestBody PaymentRequest request) {
+        return paymentService.confirm(request.toCommand());
+    }
+
 
 }

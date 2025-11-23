@@ -7,4 +7,6 @@ public interface PaymentRepository {
 
     Page<Payment> findAll(Pageable pageable);
 
+    Payment save(Payment payment);
+
 }

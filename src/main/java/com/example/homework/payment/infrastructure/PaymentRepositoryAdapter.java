@@ -17,4 +17,9 @@ public class PaymentRepositoryAdapter implements PaymentRepository {
     public Page<Payment> findAll(Pageable pageable) {
         return paymentJpaRepository.findAll(pageable);
     }
+
+    @Override
+    public Payment save(Payment payment) {
+        return paymentJpaRepository.save(payment);
+    }
 }
