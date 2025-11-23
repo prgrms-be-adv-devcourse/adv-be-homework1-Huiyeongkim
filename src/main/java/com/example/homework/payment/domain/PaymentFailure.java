@@ -1,6 +1,7 @@
 package com.example.homework.payment.domain;
 
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Schema(description = "결제 실패 엔티티")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
@@ -16,26 +18,34 @@ import java.util.UUID;
 public class PaymentFailure {
 
     @Id
+    @Schema(description = "실패 기록 고유 식별자")
     private UUID id;
 
+    @Schema(description = "주문 ID")
     @Column(name = "order_id", nullable = false, length = 100)
     private String orderId;
 
+    @Schema(description = "결제 키")
     @Column(name = "payment_key", length = 200)
     private String paymentKey;
 
+    @Schema(description = "에러 코드")
     @Column(name = "error_code", length = 50)
     private String errorCode;
 
+    @Schema(description = "에러 메시지")
     @Column(name = "error_message")
     private String errorMessage;
 
+    @Schema(description = "결제 시도 금액")
     @Column(name = "amount")
     private Long amount;
 
+    @Schema(description = "원본 페이로드")
     @Column(name = "raw_payload")
     private String rawPayload;
 
+    @Schema(description = "실패 기록 생성 일시")
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
