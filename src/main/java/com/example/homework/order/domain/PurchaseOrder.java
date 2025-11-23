@@ -44,6 +44,29 @@ public class PurchaseOrder {
         this.status = PurchaseOrderStatus.PAID;
     }
 
+    private PurchaseOrder(UUID id,
+                          UUID productId,
+                          UUID sellerId,
+                          UUID memberId,
+                          BigDecimal amount,
+                          PurchaseOrderStatus status) {
+        this.id = id;
+        this.productId = productId;
+        this.sellerId = sellerId;
+        this.memberId = memberId;
+        this.amount = amount;
+        this.status = status;
+    }
+
+    public static PurchaseOrder create(
+            UUID productId,
+            UUID sellerId,
+            UUID memberId,
+            BigDecimal amount,
+            PurchaseOrderStatus status) {
+        return new PurchaseOrder(UUID.randomUUID(), productId,sellerId, memberId, amount, status);
+    }
+
     @PrePersist
     public void onCreate() {
         LocalDateTime now = LocalDateTime.now();
