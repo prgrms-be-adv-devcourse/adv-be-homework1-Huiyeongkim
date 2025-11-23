@@ -67,6 +67,10 @@ public class PurchaseOrder {
         return new PurchaseOrder(UUID.randomUUID(), productId,sellerId, memberId, amount, status);
     }
 
+    public void changeStatus(PurchaseOrderStatus status) {
+        this.status = status;
+    }
+
     @PrePersist
     public void onCreate() {
         LocalDateTime now = LocalDateTime.now();

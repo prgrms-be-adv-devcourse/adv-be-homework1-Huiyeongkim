@@ -3,6 +3,7 @@ package com.example.homework.order.presentation;
 import com.example.homework.common.ResponseEntity;
 import com.example.homework.order.application.OrderService;
 import com.example.homework.order.application.dto.PurchaseOrderInfo;
+import com.example.homework.order.domain.PurchaseOrderStatus;
 import com.example.homework.order.presentation.dto.PurchaseOrderRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 
 @RequiredArgsConstructor
@@ -29,6 +31,18 @@ public class OrderController {
     @GetMapping
     public ResponseEntity<List<PurchaseOrderInfo>> findAll(Pageable pageable) {
         return orderService.findAll(pageable);
+    }
+
+    @Operation(summary = "주문 상태 변경", description = "주문을 결제로 변경한다.")
+    @PatchMapping("/{id}/paid")
+    public ResponseEntity<PurchaseOrderInfo> paid(@PathVariable UUID id) {
+        return orderService.statusChange(id, PurchaseOrderStatus.PAID);
+    }
+
+    @Operation(summary = "결제 취소", description = "주문의 상태를 취소한다.")
+    @PatchMapping("/{id}/canceled")
+    public ResponseEntity<PurchaseOrderInfo> update(@PathVariable UUID id) {
+        return orderService.statusChange(id, PurchaseOrderStatus.CANCELLED);
     }
 
 }

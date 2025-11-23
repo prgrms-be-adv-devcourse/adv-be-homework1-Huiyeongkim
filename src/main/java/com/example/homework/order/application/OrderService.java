@@ -5,6 +5,7 @@ import com.example.homework.order.application.dto.PurchaseOrderCommand;
 import com.example.homework.order.application.dto.PurchaseOrderInfo;
 import com.example.homework.order.domain.OrderRepository;
 import com.example.homework.order.domain.PurchaseOrder;
+import com.example.homework.order.domain.PurchaseOrderStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -33,5 +35,13 @@ public class OrderService {
                 .map(PurchaseOrderInfo::from)
                 .toList();
         return new ResponseEntity<>(HttpStatus.OK.value(), list, page.getTotalElements());
+    }
+
+    public ResponseEntity<PurchaseOrderInfo> statusChange(UUID id, PurchaseOrderStatus status) {
+        PurchaseOrder findPurchaseOrder = orderRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("order not found id : " + id));
+        findPurchaseOrder.changeStatus(status);
+        PurchaseOrder saved = orderRepository.save(findPurchaseOrder);
+        return new ResponseEntity<>(HttpStatus.OK.value(), PurchaseOrderInfo.from(saved), 1);
     }
 }

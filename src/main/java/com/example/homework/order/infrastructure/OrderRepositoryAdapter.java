@@ -7,6 +7,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+import java.util.UUID;
+
 @Repository
 @RequiredArgsConstructor
 public class OrderRepositoryAdapter implements OrderRepository {
@@ -21,5 +24,10 @@ public class OrderRepositoryAdapter implements OrderRepository {
     @Override
     public Page<PurchaseOrder> findAll(Pageable pageable) {
         return orderJpaRepository.findAll(pageable);
+    }
+
+    @Override
+    public Optional<PurchaseOrder> findById(UUID id) {
+        return orderJpaRepository.findById(id);
     }
 }
