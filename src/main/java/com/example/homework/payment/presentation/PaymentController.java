@@ -2,7 +2,9 @@ package com.example.homework.payment.presentation;
 
 import com.example.homework.common.ResponseEntity;
 import com.example.homework.payment.application.PaymentService;
+import com.example.homework.payment.application.dto.PaymentFailureInfo;
 import com.example.homework.payment.application.dto.PaymentInfo;
+import com.example.homework.payment.presentation.dto.PaymentFailureRequest;
 import com.example.homework.payment.presentation.dto.PaymentRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
@@ -31,5 +33,10 @@ public class PaymentController {
         return paymentService.confirm(request.toCommand());
     }
 
+    @Operation(summary = "결제 실패 기록", description = "토스 결제 실패 정보를 저장한다.")
+    @PostMapping("/fail")
+    public ResponseEntity<PaymentFailureInfo> fail(@RequestBody PaymentFailureRequest request) {
+        return paymentService.recordFailure(request.toCommand());
+    }
 
 }
