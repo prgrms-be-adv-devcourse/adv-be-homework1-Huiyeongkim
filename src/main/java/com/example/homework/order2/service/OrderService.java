@@ -1,10 +1,10 @@
-package com.example.homework.order.service;
+package com.example.homework.order2.service;
 
 
-import com.example.homework.order.entity.PurchaseOrder;
-import com.example.homework.order.entity.PurchaseOrderStatus;
-import com.example.homework.order.entity.ResponseEntity;
-import com.example.homework.order.repository.OrderJpaRepository;
+import com.example.homework.order2.entity.PurchaseOrder;
+import com.example.homework.order2.entity.PurchaseOrderStatus;
+import com.example.homework.order2.entity.ResponseEntity;
+import com.example.homework.order2.repository.OrderJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -1,6 +1,6 @@
-package com.example.homework.order.repository;
+package com.example.homework.order2.repository;
 
-import com.example.homework.order.entity.PurchaseOrder;
+import com.example.homework.order2.entity.PurchaseOrder;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;

@@ -1,4 +1,4 @@
-package com.example.homework.order.entity;
+package com.example.homework.order2.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
