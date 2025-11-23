@@ -23,8 +23,10 @@ public class OrderService {
 
     public ResponseEntity<PurchaseOrderInfo> create(PurchaseOrderCommand command) {
         PurchaseOrder purchaseOrder = PurchaseOrder.create(
-                command.productId(), command.sellerId(),
-                command.memberId(), command.amount(), command.status());
+                command.productId(),
+                command.sellerId(),
+                command.memberId(),
+                command.amount());
         PurchaseOrder saved = orderRepository.save(purchaseOrder);
         return new ResponseEntity<>(HttpStatus.CREATED.value(), PurchaseOrderInfo.from(saved), 1);
     }

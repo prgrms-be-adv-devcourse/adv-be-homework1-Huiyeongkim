@@ -48,23 +48,20 @@ public class PurchaseOrder {
                           UUID productId,
                           UUID sellerId,
                           UUID memberId,
-                          BigDecimal amount,
-                          PurchaseOrderStatus status) {
+                          BigDecimal amount) {
         this.id = id;
         this.productId = productId;
         this.sellerId = sellerId;
         this.memberId = memberId;
         this.amount = amount;
-        this.status = status;
     }
 
     public static PurchaseOrder create(
             UUID productId,
             UUID sellerId,
             UUID memberId,
-            BigDecimal amount,
-            PurchaseOrderStatus status) {
-        return new PurchaseOrder(UUID.randomUUID(), productId,sellerId, memberId, amount, status);
+            BigDecimal amount) {
+        return new PurchaseOrder(UUID.randomUUID(), productId,sellerId, memberId, amount);
     }
 
     public void changeStatus(PurchaseOrderStatus status) {
